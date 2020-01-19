@@ -46,6 +46,26 @@ switch (operation) {
       });
     break;
   case "spotify-this-song":
+    var songsFromRes = [];
+    if (name === "") {
+      name = "The Sign";
+      //   if user didn't enter the name of a song, the app will call api to get the info of the song "The Sign"
+    }
+    spotify
+      .search({ type: "track", query: name })
+      .then(function(response) {
+        for (var i = 0; i < 20; i++) {
+          songsFromRes.push(response.tracks.items[i].name);
+        }
+        var songIdx = songsFromRes.indexOf(name);
+        var song = response.tracks.items[songIdx];
+        console.log(
+          `Artist(s): ${song.artists[0].name}\nThe song's name: ${song.name}\nPreview link: ${song.preview_url}\nThe album that the song is from: ${song.album.name}`
+        );
+      })
+      .catch(function(err) {
+        console.log("Sorry, it didn't work. Please try something else.");
+      });
     break;
   case "movie-this":
     break;
