@@ -15,6 +15,15 @@ function toTitleCase(str) {
   });
 }
 name = toTitleCase(name);
+var search = `The command is to ${operation},"${name}"`;
+// function to write data from searching into a file
+function log(data) {
+  fs.appendFile("log.txt", `${data}\n\n`, err => {
+    if (err) throw err;
+  });
+}
+// write the command into the designated file
+log(search);
 // functions to search concerts, songs and movies
 function toSearchConcerts(name) {
   axios
@@ -32,13 +41,13 @@ function toSearchConcerts(name) {
           var time = moment(events[i].datetime.split("T")[0]).format(
             "MM/DD/YYYY"
           );
-          console.log(
-            `Event ${[i + 1]}:\nName of the Venue: ${
-              venue.name
-            }\nThe Location of the Venue: ${venue.city}, ${venue.region}, ${
-              venue.country
-            }\nThe Date of the Event: ${time} `
-          );
+          var results = `Event ${[i + 1]}:\nName of the Venue: ${
+            venue.name
+          }\nThe Location of the Venue: ${venue.city}, ${venue.region}, ${
+            venue.country
+          }\nThe Date of the Event: ${time} `;
+          console.log(results);
+          log(results);
         }
       }
     });
@@ -57,9 +66,9 @@ function toSearchSongs(name) {
       }
       var songIdx = songsFromRes.indexOf(name);
       var song = response.tracks.items[songIdx];
-      console.log(
-        `Artist(s): ${song.artists[0].name}\nThe song's name: ${song.name}\nPreview link: ${song.preview_url}\nThe album that the song is from: ${song.album.name}`
-      );
+      var results = `Artist(s): ${song.artists[0].name}\nThe song's name: ${song.name}\nPreview link: ${song.preview_url}\nThe album that the song is from: ${song.album.name}`;
+      console.log(results);
+      log(results);
     })
     .catch(function(err) {
       console.log("Sorry, it didn't work. Please try something else.");
@@ -74,11 +83,9 @@ function toSearchMovies(name) {
     .then(function(response) {
       var movie = response.data;
       var releasedYear = movie.Released.split(" ")[2];
-      console.log(movie);
-      console.log(
-        `The title of the movie: ${movie.Title}\nReleased Year: ${releasedYear}\nIMDB Rating: ${movie.Ratings[0].Value}\nRotten Tomatoes Rating: ${movie.Ratings[1].Value}\nProduced Countries: ${movie.Country}\nLanguage: ${movie.Language}`
-      );
-      console.log(`Plot: ${movie.Plot}\nActors: ${movie.Actors}`);
+      var results = `The title of the movie: ${movie.Title}\nReleased Year: ${releasedYear}\nIMDB Rating: ${movie.Ratings[0].Value}\nRotten Tomatoes Rating: ${movie.Ratings[1].Value}\nProduced Countries: ${movie.Country}\nLanguage: ${movie.Language}\nPlot: ${movie.Plot}\nActors: ${movie.Actors}`;
+      console.log(results);
+      log(results);
     })
     .catch(function(error) {
       console.log("Sorry, it didn't work. Please try something else.");
@@ -99,13 +106,12 @@ function liri(operation, name) {
     case "do-what-it-says":
       fs.readFile("./random.txt", (err, data) => {
         if (err) throw err;
-        var operation = data.toString().split(",")[0];
-        var name = data
+        operation = data.toString().split(",")[0];
+        name = data
           .toString()
           .split(",")[1]
           .split('"')[1];
         name = toTitleCase(name);
-        console.log(name);
         liri(operation, name);
       });
       break;

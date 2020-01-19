@@ -1,0 +1,37 @@
+The command is to spotify-this-song,"Rolling In The Deep"
+
+Artist(s): Adele
+The song's name: Rolling In The Deep
+Preview link: https://p.scdn.co/mp3-preview/3858c424d6b802f62ba2ca1485c96d9861e278c2?cid=346c99086d80415186e1e208f2e90344
+The album that the song is from: Pay Close Attention : XL Recordings
+
+The command is to concert-this,"Melanie"
+
+Event 1:
+Name of the Venue: Aldwych Theatre
+The Location of the Venue: London, , United Kingdom
+The Date of the Event: 02/09/2020 
+
+Event 2:
+Name of the Venue: The Triple Door
+The Location of the Venue: Seattle, WA, United States
+The Date of the Event: 03/20/2020 
+
+The command is to movie-this,"Catch Me If You Can"
+
+The title of the movie: Catch Me If You Can
+Released Year: 2002
+IMDB Rating: 8.1/10
+Rotten Tomatoes Rating: 96%
+Produced Countries: USA, Canada
+Language: English, French
+Plot: A seasoned FBI agent pursues Frank Abagnale Jr. who, before his 19th birthday, successfully forged millions of dollars' worth of checks while posing as a Pan Am pilot, a doctor, and a legal prosecutor.
+Actors: Leonardo DiCaprio, Tom Hanks, Christopher Walken, Martin Sheen
+
+The command is to do-what-it-says,""
+
+Artist(s): Backstreet Boys
+The song's name: I Want It That Way
+Preview link: https://p.scdn.co/mp3-preview/e72a05dc3f69c891e3390c3ceaa77fad02f6b5f6?cid=346c99086d80415186e1e208f2e90344
+The album that the song is from: The Hits--Chapter One
+
