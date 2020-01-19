@@ -19,9 +19,7 @@ switch (operation) {
   case "concert-this":
     axios
       .get(
-        "https://rest.bandsintown.com/artists/" +
-          name +
-          "/events?app_id=codingbootcamp"
+        `https://rest.bandsintown.com/artists/${name}/events?app_id=${keys.bandsId}`
       )
       .then(function(response) {
         var events = response.data;
@@ -68,6 +66,23 @@ switch (operation) {
       });
     break;
   case "movie-this":
+    if (name === "") {
+      name = "Mr. Nobody";
+    }
+    axios
+      .get(`http://www.omdbapi.com/?t=${name}&apikey=${keys.movieId}`)
+      .then(function(response) {
+        var movie = response.data;
+        var releasedYear = movie.Released.split(" ")[2];
+        console.log(movie);
+        console.log(
+          `The title of the movie: ${movie.Title}\nReleased Year: ${releasedYear}\nIMDB Rating: ${movie.Ratings[0].Value}\nRotten Tomatoes Rating: ${movie.Ratings[1].Value}\nProduced Countries: ${movie.Country}\nLanguage: ${movie.Language}`
+        );
+        console.log(`Plot: ${movie.Plot}\nActors: ${movie.Actors}`);
+      })
+      .catch(function(error) {
+        console.log("Sorry, it didn't work. Please try something else.");
+      });
     break;
   case "do-what-it-says":
     break;
