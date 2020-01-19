@@ -84,21 +84,35 @@ function toSearchMovies(name) {
       console.log("Sorry, it didn't work. Please try something else.");
     });
 }
-// take in commands from node
-switch (operation) {
-  case "concert-this":
-    toSearchConcerts(name);
-    break;
-  case "spotify-this-song":
-    toSearchSongs(name);
-    break;
-  case "movie-this":
-    toSearchMovies(name);
-    break;
-  case "do-what-it-says":
-    break;
-  default:
-    console.log(
-      `Unsupported command. Please try "concert-this", "spotify-this-song", "movie-this" or "do-what-it-says".`
-    );
+// function to take in commands from node or other files
+function liri(operation, name) {
+  switch (operation) {
+    case "concert-this":
+      toSearchConcerts(name);
+      break;
+    case "spotify-this-song":
+      toSearchSongs(name);
+      break;
+    case "movie-this":
+      toSearchMovies(name);
+      break;
+    case "do-what-it-says":
+      fs.readFile("./random.txt", (err, data) => {
+        if (err) throw err;
+        var operation = data.toString().split(",")[0];
+        var name = data
+          .toString()
+          .split(",")[1]
+          .split('"')[1];
+        name = toTitleCase(name);
+        console.log(name);
+        liri(operation, name);
+      });
+      break;
+    default:
+      console.log(
+        `Unsupported command. Please try "concert-this", "spotify-this-song", "movie-this" or "do-what-it-says".`
+      );
+  }
 }
+liri(operation, name);
