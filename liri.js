@@ -8,6 +8,13 @@ var spotify = new Spotify(keys.spotify);
 // take in commands
 const [_, __, operation] = process.argv;
 var name = process.argv.slice(3).join(" ");
+// No matter how user input the name, change the format to a title format
+function toTitleCase(str) {
+  return str.replace(/\w\S*/g, function(txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+}
+name = toTitleCase(name);
 switch (operation) {
   case "concert-this":
     axios
